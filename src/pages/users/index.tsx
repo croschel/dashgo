@@ -17,38 +17,13 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
-import { useQuery } from "react-query";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
-import { api } from "../../services/axios";
-
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  created_at: string;
-};
+import { useUsers } from "../../hooks/useUsers";
 
 export default function UserList() {
-  const { data, isLoading, error, isFetching } = useQuery("users", async () => {
-    const { data } = await api.get("users");
-
-    const users = data.users.map((user) => {
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        created_at: new Date(user.created_at).toLocaleDateString("pt-BR", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        }),
-      };
-    });
-
-    return users;
-  });
+  const { data, isLoading, error, isFetching } = useUsers();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -103,7 +78,7 @@ export default function UserList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.map((user: User) => (
+                  {data.map((user) => (
                     <Tr key={user.id}>
                       <Td px={["4", "4", "6"]} color="gray.300" width="8">
                         <Checkbox colorScheme="pink" />
