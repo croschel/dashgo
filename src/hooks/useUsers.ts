@@ -8,8 +8,20 @@ interface User {
   created_at: string;
 }
 
-export async function getUsers() {
-  const { data } = await api.get("users");
+interface GetUsersResponse {
+  users: User[];
+  totalCount: number;
+}
+
+export async function getUsers(page: number): Promise<GetUsersResponse> {
+  const { data, headers } = await api.get("users", {
+    params: {
+      page,
+    },
+  });
+
+  const totalCount = Number(headers["x-total-count"]);
+  console.log(totalCount);
 
   const users = data.users.map((user) => {
     return {
@@ -24,11 +36,11 @@ export async function getUsers() {
     };
   });
 
-  return users;
+  return { users, totalCount };
 }
 
-export function useUsers() {
-  return useQuery<User[]>("users", getUsers, {
+export function useUsers(page) {
+  return useQuery("users", () => getUsers(page), {
     staleTime: 1000 * 5, // 5 seconds
   });
 }
