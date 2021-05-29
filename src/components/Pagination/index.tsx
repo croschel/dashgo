@@ -67,7 +67,11 @@ export function Pagination({
         />
         {nextPages.length > 0 &&
           nextPages.map((page) => (
-            <PaginationItem onPageChange={onPageChange} number={page} />
+            <PaginationItem
+              key={page}
+              onPageChange={onPageChange}
+              number={page}
+            />
           ))}
         {currentPage + siblingsCount < lastPage && (
           <>

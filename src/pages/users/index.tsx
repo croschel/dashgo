@@ -16,7 +16,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
@@ -31,7 +31,7 @@ export default function UserList() {
     md: true,
     lg: true,
   });
-  // console.log("x-total-count :: ", data.users);
+
   return (
     <Box>
       <Header />
