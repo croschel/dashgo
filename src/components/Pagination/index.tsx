@@ -58,7 +58,11 @@ export function Pagination({
         )}
         {previousPages.length > 0 &&
           previousPages.map((page) => (
-            <PaginationItem onPageChange={onPageChange} number={page} />
+            <PaginationItem
+              key={page}
+              onPageChange={onPageChange}
+              number={page}
+            />
           ))}
         <PaginationItem
           onPageChange={onPageChange}
