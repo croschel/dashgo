@@ -20,9 +20,9 @@ export async function getUsers(page: number): Promise<GetUsersResponse> {
     },
   });
 
-  // const totalCount = Number(headers["x-total-count"]);
-  // console.log(totalCount);
-  const totalCount = data.counter;
+  const totalCount = Number(headers["x-total-count"]);
+  console.log("Total Users on Hook :: ", totalCount);
+  // const totalCount = data.counter;
   const users = data.users.map((user) => {
     return {
       id: user.id,

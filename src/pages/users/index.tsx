@@ -46,7 +46,7 @@ export default function UserList() {
       }
     );
   }
-
+  // console.log("Data from mirageJS :: ", data.totalCount);
   return (
     <Box>
       <Header />
