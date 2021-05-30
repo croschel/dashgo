@@ -47,6 +47,7 @@ export function makeServer() {
           { users, counter: total }
         );
       });
+      this.get("/users/:id");
       this.post("/users");
       this.namespace = ""; // I set this field just to avoid some conflict with api folder inside of src for next
       this.passthrough();
